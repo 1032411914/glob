@@ -1,0 +1,17 @@
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
+from app.database import Base
+
+
+class Category(Base):
+    """分类模型
+    
+    存储文章分类信息
+    """
+    __tablename__ = "categories"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(100), nullable=False, unique=True)
+    description = Column(String(500))
+    
+    articles = relationship("Article", back_populates="category")
